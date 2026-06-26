@@ -3,58 +3,31 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Segment Controller — Options (Genoa tokens)</title>
+  <title>DS Component Prototypes</title>
   <style>
-    /* ────────────────────────────────────────────────────────────────
-       GENOA DESIGN TOKENS
-       Values resolved from genoa/src/rxp/unistyles.ts + globalStyles.ts.
-       Each variable is named after the semantic token it represents so
-       this prototype maps 1:1 to the real SegmentedControl component.
-       ──────────────────────────────────────────────────────────────── */
     :root {
-      /* surface.default  → primary.white            (pill / thumb) */
-      --surface-default: #FFFFFF;
-
-      /* TRACK BACKGROUND — divergence point (see note panel).
-         Flip --track-bg between the three candidates below to compare:
-           surface.callout  → stone-03  #EEF0F2  (prototype + handoff spec)
-           surface.subdued  → stone-02  #F6F7F8  (what the component ships TODAY, placeholder)
-           stone-04         → #E6E8EB            (TODO(DS-84) design target, no token yet) */
-      --surface-callout: #EEF0F2;
-      --surface-subdued: #F6F7F8;
-      --stone-04:        #E6E8EB;
-      --track-bg: var(--surface-callout);
-
-      /* SELECTED TEXT — divergence point (see note panel).
-         text.default          → offBlack       #1D1D1D  (prototype + handoff spec)
-         text.brand.expressive → brandPurple-02 #6A3DB8  (what the component ships TODAY) */
+      --surface: #FFFFFF;
+      --page-bg: #f5f5f5;
       --text-default: #1D1D1D;
-      --text-brand-expressive: #6A3DB8;
-      --selected-text: var(--text-default);
-
-      /* text.subdued  → stone-09   (unselected label) */
       --text-subdued: #5E626A;
-
-      /* text.disabled → stone-07   (variant C transitional gray) */
-      --text-disabled: #AEB2BA;
-
-      /* base.onSurface → offBlack  (pill shadow color) */
-      --base-on-surface: #1D1D1D;
+      --border: #E6E8EB;
+      --brand: #6A3DB8;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
-      background: #f5f5f5;
+      background: var(--page-bg);
+      color: var(--text-default);
+      font-family: 'ABC Diatype', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      min-height: 100vh;
+      padding: 64px 24px 96px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 48px 24px 80px;
-      font-family: 'ABCDiatype-Bold', 'ABC Diatype', -apple-system, BlinkMacSystemFont, sans-serif;
-      gap: 0;
     }
 
-    .page-title {
+    .eyebrow {
       font-size: 13px;
       color: #999;
       letter-spacing: 0.04em;
@@ -63,311 +36,77 @@
       margin-bottom: 12px;
     }
 
-    /* ── Token-divergence controls ─────────────────────────────────── */
-    .controls {
-      width: 100%;
-      max-width: 420px;
-      background: var(--surface-default);
-      border: 1px solid #e0e0e0;
-      border-radius: 12px;
-      padding: 16px 18px;
-      margin-bottom: 24px;
-      font-size: 12px;
-      color: #1d1d1d;
+    h1 {
+      font-size: 30px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      margin-bottom: 8px;
     }
-    .controls h2 {
-      font-size: 12px;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-      color: #5e626a;
-      margin-bottom: 10px;
-    }
-    .control-row { display: flex; align-items: center; gap: 8px; margin: 8px 0; flex-wrap: wrap; }
-    .control-row label { font-weight: 700; min-width: 110px; }
-    .control-row select {
-      font-size: 12px; padding: 4px 8px; border-radius: 6px; border: 1px solid #d9dce0;
-      font-family: inherit; background: #fff;
-    }
-    .control-note { color: #5e626a; line-height: 1.5; margin-top: 8px; font-weight: 400; }
 
-    .variant {
+    .subtitle {
+      font-size: 15px;
+      color: var(--text-subdued);
+      margin-bottom: 40px;
+      text-align: center;
+      max-width: 520px;
+      line-height: 1.5;
+    }
+
+    .list {
       width: 100%;
-      max-width: 420px;
+      max-width: 560px;
       display: flex;
       flex-direction: column;
-      align-items: center;
       gap: 12px;
-      padding: 28px 0 32px;
-      border-bottom: 1px solid #e0e0e0;
-    }
-    .variant:last-child { border-bottom: none; }
-
-    .variant-name {
-      width: 345px;
-      font-size: 14px;
-      font-weight: 700;
-      color: #1d1d1d;
-      letter-spacing: -0.01em;
     }
 
-    .variant-desc {
-      width: 345px;
+    /* ── Prototype card. Copy this <a> block to add a new prototype. ── */
+    .proto {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px 22px;
+      text-decoration: none;
+      color: inherit;
+      transition: border-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+    }
+    .proto:hover {
+      border-color: var(--brand);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(29, 29, 29, 0.06);
+    }
+    .proto__body { display: flex; flex-direction: column; gap: 4px; }
+    .proto__name { font-size: 16px; font-weight: 600; }
+    .proto__desc { font-size: 13px; color: var(--text-subdued); line-height: 1.45; }
+    .proto__arrow { color: var(--brand); font-size: 20px; line-height: 1; flex-shrink: 0; }
+
+    footer {
+      margin-top: 48px;
       font-size: 12px;
-      color: #5e626a;
-      line-height: 1.55;
-    }
-
-    /* ── SegmentedControl — geometry matches the component ──────────────
-       track: padding 4 (TRACK_PADDING), gap 4 (SEGMENT_GAP), radius.full
-       segment: paddingVertical 8 (spacing_50), paddingHorizontal 16 (spacing_100)
-       thumb: surface.default + soft shadow                              */
-    .segment-controller {
-      position: relative;
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      padding: 4px;
-      background: var(--track-bg);
-      border-radius: 200px;
-      width: 345px;
-      user-select: none;
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    .selector-pill {
-      position: absolute;
-      top: 4px;
-      height: calc(100% - 8px);
-      background: var(--surface-default);
-      border-radius: 200px;
-      box-shadow: 0 1px 4px rgba(29,29,29,0.15);
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    .segment-item {
-      position: relative;
-      z-index: 1;
-      flex: 1 0 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 8px 16px;
-      border-radius: 200px;
-      cursor: pointer;
-      min-width: 0;
-    }
-
-    .segment-item span {
-      font-size: 16px;
-      font-weight: 700;
-      line-height: 22px;
-      letter-spacing: -0.01em;
-      white-space: nowrap;
-    }
-
-    .chip {
-      width: 345px;
-      font-size: 11px;
-      font-weight: 600;
-      color: #5e626a;
+      color: #999;
     }
   </style>
 </head>
 <body>
+  <div class="eyebrow">Flex Design System</div>
+  <h1>Component Prototypes</h1>
+  <p class="subtitle">Self-contained HTML prototypes for design system components — open any one directly in a browser, no build required.</p>
 
-  <span class="page-title">Segment Controller — 3 Options · Genoa tokens</span>
-
-  <!-- Token divergence controls -->
-  <div class="controls">
-    <h2>Token divergences vs. shipping component</h2>
-    <div class="control-row">
-      <label for="selSelected">Selected text</label>
-      <select id="selSelected">
-        <option value="var(--text-default)">text.default · #1D1D1D (spec)</option>
-        <option value="var(--text-brand-expressive)">text.brand.expressive · #6A3DB8 (in code)</option>
-      </select>
-    </div>
-    <div class="control-row">
-      <label for="selTrack">Track bg</label>
-      <select id="selTrack">
-        <option value="var(--surface-callout)">surface.callout · #EEF0F2 (spec)</option>
-        <option value="var(--surface-subdued)">surface.subdued · #F6F7F8 (in code, placeholder)</option>
-        <option value="var(--stone-04)">stone-04 · #E6E8EB (DS-84 target)</option>
-      </select>
-    </div>
-    <div class="control-note">
-      Variant&nbsp;C's transitional gray uses <strong>text.disabled · #AEB2BA</strong> (stone-07) —
-      the one token the prototype was missing. No other new tokens are needed.
-    </div>
+  <div class="list">
+    <!-- Segment Control -->
+    <a class="proto" href="segment-control-options.html">
+      <span class="proto__body">
+        <span class="proto__name">Segment Control — Options</span>
+        <span class="proto__desc">Micro-animation options (A/B/C) and token-divergence comparison using Genoa design tokens.</span>
+      </span>
+      <span class="proto__arrow" aria-hidden="true">&rarr;</span>
+    </a>
   </div>
 
-  <!-- A -->
-  <div class="variant">
-    <div class="variant-name">A — Dissolve on tap</div>
-    <div class="variant-desc">Text dissolves the moment you tap, before the selector starts moving.</div>
-    <div class="segment-controller" id="scA">
-      <div class="selector-pill" id="pillA"></div>
-      <div class="segment-item" onclick="selectA(0)"><span>Day</span></div>
-      <div class="segment-item" onclick="selectA(1)"><span>Week</span></div>
-      <div class="segment-item" onclick="selectA(2)"><span>Month</span></div>
-    </div>
-    <div class="chip">Fade-out 80ms ease-in at t=0 · Fade-in 200ms ease-out on arrival</div>
-  </div>
-
-  <!-- B -->
-  <div class="variant">
-    <div class="variant-name">B — No dissolve</div>
-    <div class="variant-desc">Pill slides only. Text stays fully visible — color snaps as the pill arrives.</div>
-    <div class="segment-controller" id="scB">
-      <div class="selector-pill" id="pillB"></div>
-      <div class="segment-item" onclick="selectB(0)"><span>Day</span></div>
-      <div class="segment-item" onclick="selectB(1)"><span>Week</span></div>
-      <div class="segment-item" onclick="selectB(2)"><span>Month</span></div>
-    </div>
-    <div class="chip">No opacity animation · Color snaps on arrival at t=250ms</div>
-  </div>
-
-  <!-- C -->
-  <div class="variant">
-    <div class="variant-name">C — Color transition (DoorDash-style)</div>
-    <div class="variant-desc">No opacity change. Both labels transition through gray as the pill moves, then resolve to their final color on arrival.</div>
-    <div class="segment-controller" id="scC">
-      <div class="selector-pill" id="pillC"></div>
-      <div class="segment-item" onclick="selectC(0)"><span>Day</span></div>
-      <div class="segment-item" onclick="selectC(1)"><span>Week</span></div>
-      <div class="segment-item" onclick="selectC(2)"><span>Month</span></div>
-    </div>
-    <div class="chip">No opacity change · Both labels transition through gray (text.disabled) · Resolve on arrival</div>
-  </div>
-
-  <script>
-    // Resolve Genoa tokens from CSS variables so the divergence selectors work live.
-    const root = document.documentElement;
-    const tok = (name) => getComputedStyle(root).getPropertyValue(name).trim();
-
-    const SLIDE = 250; // handoff animation spec (in-code component currently uses 200ms)
-
-    function colors() {
-      return {
-        SEL:   tok('--selected-text'),
-        UNSEL: tok('--text-subdued'),
-        GRAY:  tok('--text-disabled'),
-      };
-    }
-
-    function makeController(scId, pillId, mode) {
-      const sc    = document.getElementById(scId);
-      const pill  = document.getElementById(pillId);
-      const items = Array.from(sc.querySelectorAll('.segment-item'));
-      const spans = items.map(el => el.querySelector('span'));
-      let current = 0;
-      let busy    = false;
-      let timers  = [];
-
-      function getRect(i) {
-        const sr = sc.getBoundingClientRect();
-        const ir = items[i].getBoundingClientRect();
-        return { left: ir.left - sr.left, width: ir.width };
-      }
-
-      function applyColor(span, c, dur, ease = 'linear') {
-        span.style.transition = `color ${dur}ms ${ease}, opacity ${dur}ms ${ease}`;
-        span.style.color = c;
-      }
-
-      function applyOpacity(span, o, dur, ease = 'linear') {
-        span.style.transition = `opacity ${dur}ms ${ease}, color ${dur}ms ${ease}`;
-        span.style.opacity = o;
-      }
-
-      function after(ms, fn) { timers.push(setTimeout(fn, ms)); }
-
-      function init() {
-        const { SEL, UNSEL } = colors();
-        const r = getRect(current);
-        pill.style.transition = 'none';
-        pill.style.left  = r.left  + 'px';
-        pill.style.width = r.width + 'px';
-        spans.forEach((s, i) => {
-          s.style.transition = 'none';
-          s.style.opacity = 1;
-          s.style.color   = i === current ? SEL : UNSEL;
-        });
-      }
-
-      function select(target) {
-        if (busy || target === current) return;
-        busy = true;
-        timers.forEach(clearTimeout);
-        timers = [];
-
-        const { SEL, UNSEL, GRAY } = colors();
-        const prev = current;
-        current = target;
-
-        const r = getRect(target);
-        pill.style.transition = `left ${SLIDE}ms ease-in-out, width ${SLIDE}ms ease-in-out`;
-        pill.style.left  = r.left  + 'px';
-        pill.style.width = r.width + 'px';
-
-        if (mode === 'dissolve') {
-          applyOpacity(spans[prev],   0, 80, 'ease-in');
-          applyOpacity(spans[target], 0, 80, 'ease-in');
-          after(SLIDE, () => {
-            applyOpacity(spans[target], 1, 200, 'ease-out');
-            spans[target].style.color = SEL;
-            after(200, () => {
-              spans[prev].style.transition = 'none';
-              spans[prev].style.opacity = 1;
-              spans[prev].style.color   = UNSEL;
-              busy = false;
-            });
-          });
-
-        } else if (mode === 'none') {
-          after(SLIDE, () => {
-            spans[target].style.transition = 'none';
-            spans[target].style.color = SEL;
-            spans[prev].style.transition   = 'none';
-            spans[prev].style.color = UNSEL;
-            busy = false;
-          });
-
-        } else if (mode === 'colortransition') {
-          applyColor(spans[prev],   GRAY, SLIDE * 0.6, 'ease-in-out');
-          applyColor(spans[target], GRAY, SLIDE * 0.6, 'ease-in-out');
-          after(SLIDE, () => {
-            applyColor(spans[target], SEL,   150, 'ease-out');
-            applyColor(spans[prev],   UNSEL, 150, 'ease-out');
-            after(150, () => { busy = false; });
-          });
-        }
-      }
-
-      requestAnimationFrame(() => requestAnimationFrame(init));
-      window.addEventListener('resize', init);
-      select.reinit = init;
-      return select;
-    }
-
-    const selectA = makeController('scA', 'pillA', 'dissolve');
-    const selectB = makeController('scB', 'pillB', 'none');
-    const selectC = makeController('scC', 'pillC', 'colortransition');
-
-    // Wire up the divergence selectors — repaint all three controllers on change.
-    function repaintAll() {
-      selectA.reinit();
-      selectB.reinit();
-      selectC.reinit();
-    }
-    document.getElementById('selSelected').addEventListener('change', (e) => {
-      root.style.setProperty('--selected-text', e.target.value);
-      repaintAll();
-    });
-    document.getElementById('selTrack').addEventListener('change', (e) => {
-      root.style.setProperty('--track-bg', e.target.value);
-    });
-  </script>
+  <footer>Maintained by Sami · samantha.wong@getflex.com</footer>
 </body>
 </html>
